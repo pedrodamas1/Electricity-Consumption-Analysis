@@ -1,9 +1,0 @@
-2%
-
-Tipo de tarifa:
-bi-horário
-
-Ciclo horário:
-semanal
-
-Maria Costa - Repsol

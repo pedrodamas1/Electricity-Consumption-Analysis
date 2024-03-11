@@ -7,33 +7,12 @@ import re
 
 # Generate a placeholder for data
 data = pd.DataFrame(columns=['Year', 'Month', 'RAW', 'CORRECTED']).set_index(['Year', 'Month'])
-# data.loc[('1', '2'),:] = 1,2
-# data.loc[('1', '23'), 'RAW'] = 3
 
 # List the folders for analysis
-state = 'RAW'
-files = [
-    f'DATA/{state}/2022/07.xlsx',
-    f'DATA/{state}/2022/08.xlsx',
-    f'DATA/{state}/2022/09.xlsx',
-    f'DATA/{state}/2022/10.xlsx',
-    f'DATA/{state}/2022/11.xlsx',
-    f'DATA/{state}/2022/12.xlsx',
-    f'DATA/{state}/2023/01.xlsx',
-    f'DATA/{state}/2023/02.xlsx',
-    f'DATA/{state}/2023/03.xlsx',
-    f'DATA/{state}/2023/04.xlsx',
-    f'DATA/{state}/2023/05.xlsx',
-    f'DATA/{state}/2023/06.xlsx',
-    f'DATA/{state}/2023/07.xlsx',
-    f'DATA/{state}/2023/08.xlsx',
-    f'DATA/{state}/2023/09.xlsx',
-    f'DATA/{state}/2023/10.xlsx',
-    f'DATA/{state}/2023/11.xlsx',
-    f'DATA/{state}/2023/12.xlsx',
-]
+paths = ['DATA/RAW/2022/{:02d}.xlsx'.format(month) for month in range(7,13)] + \
+    ['DATA/RAW/2023/{:02d}.xlsx'.format(month) for month in range(1,13)]
 
-for path in files:
+for path in paths:
     # Start the analysis
     print(f"Starting the analysis of the file {path}")
     # Get the file info
@@ -50,19 +29,10 @@ for path in files:
     data.loc[(year, month), 'RAW'] = consumo
 
 # List the folders for analysis
-state = 'CORRECTED'
-files = [
-    f'DATA/{state}/2022/07.xlsx',
-    f'DATA/{state}/2022/08.xlsx',
-    f'DATA/{state}/2022/09.xlsx',
-    f'DATA/{state}/2022/10.xlsx',
-    f'DATA/{state}/2022/11.xlsx',
-    f'DATA/{state}/2022/12.xlsx',
-    f'DATA/{state}/2023/01.xlsx',
-    f'DATA/{state}/2023/02.xlsx',
-]
+paths = ['DATA/CORRECTED/2022/{:02d}.xlsx'.format(month) for month in range(7,13)] + \
+    ['DATA/CORRECTED/2023/{:02d}.xlsx'.format(month) for month in range(1,13)]
 
-for path in files:
+for path in paths:
     # Start the analysis
     print(f"Starting the analysis of the file {path}")
     # Get the file info

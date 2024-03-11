@@ -5,28 +5,8 @@ This script assigns a tariff to each 15 minute interval and summarizes the data 
 import pandas as pd 
 import re 
 
-state = 'CORRECTED'
-# List the folders for analysis
-files = [
-    f'DATA/{state}/2022/07.xlsx',
-    f'DATA/{state}/2022/08.xlsx',
-    f'DATA/{state}/2022/09.xlsx',
-    f'DATA/{state}/2022/10.xlsx',
-    f'DATA/{state}/2022/11.xlsx',
-    f'DATA/{state}/2022/12.xlsx',
-    f'DATA/{state}/2023/01.xlsx',
-    f'DATA/{state}/2023/02.xlsx',
-    f'DATA/{state}/2023/03.xlsx',
-    f'DATA/{state}/2023/04.xlsx',
-    f'DATA/{state}/2023/05.xlsx',
-    f'DATA/{state}/2023/06.xlsx',
-    f'DATA/{state}/2023/07.xlsx',
-    f'DATA/{state}/2023/08.xlsx',
-    f'DATA/{state}/2023/09.xlsx',
-    f'DATA/{state}/2023/10.xlsx',
-    f'DATA/{state}/2023/11.xlsx',
-    f'DATA/{state}/2023/12.xlsx',
-]
+paths = ['DATA/CORRECTED/2022/{:02d}.xlsx'.format(month) for month in range(7,13)] + \
+    ['DATA/CORRECTED/2023/{:02d}.xlsx'.format(month) for month in range(1,13)]
 
 # Load the tariffs data
 tariffs = pd.read_excel('INFO/TARIFAS.xlsx', sheet_name='TARIFAS')
@@ -53,7 +33,7 @@ def get_tariff(row):
 	return pd.Series([selec.loc['WEEKLY', 'PERIOD'], selec.loc['DAILY', 'PERIOD']])
 
 
-for path in files:
+for path in paths:
 	# Start the analysis
 	print(f"Starting the analysis of the file {path}")
 	# Get the file info
